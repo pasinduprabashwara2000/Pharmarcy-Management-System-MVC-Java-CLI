@@ -1,0 +1,104 @@
+package edu.ijse.mvc.cli.view;
+
+import edu.ijse.mvc.cli.controller.PatientController;
+import edu.ijse.mvc.cli.dto.PatientDTO;
+import java.util.Scanner;
+
+public class PatientView {
+
+    final private PatientController patientController = new PatientController();
+    final private Scanner input = new Scanner(System.in);
+
+    public void PatientManagement() throws Exception {
+
+        System.out.println("");
+        System.out.println("============================");
+        System.out.println("=====Patient Management=====");
+        System.out.println("=============================");
+        System.out.println("");
+
+        System.out.println("1. Add Patients");
+        System.out.println("2. Update Patients");
+        System.out.println("3. Delete Patients");
+        System.out.println("4. Search Patients");
+
+        System.out.println("");
+        System.out.print("Input Number : ");
+        int num = input.nextInt();
+
+        switch (num) {
+            case 1:
+                PatientView patientView = new PatientView();
+                patientView.addPatient();
+                break;
+            case 2:
+                PatientView patientView2 = new PatientView();
+                patientView2.updatePatient();
+                break;
+            case 3:
+                 PatientView patientView3 = new PatientView();
+                 patientView3.deletePatient();
+
+            default:
+                break;
+        }
+    }
+
+    public void addPatient() throws Exception {
+
+        System.out.println("");
+        System.out.println("============================");
+        System.out.println("=========Add Patient========");
+        System.out.println("=============================");
+        System.out.println("");
+
+        System.out.print("Input Patient Name : ");
+        String name = input.nextLine();
+
+        System.out.print("Input Patient Contact Number : ");
+        String contact = input.nextLine();
+
+        PatientDTO patientDTO = new PatientDTO(0,name,contact);
+        patientController.savePatient(patientDTO);
+
+    }
+
+    public void updatePatient() throws Exception {
+
+        System.out.println("");
+        System.out.println("=============================");
+        System.out.println("========Update Patient=======");
+        System.out.println("=============================");
+        System.out.println("");
+
+        System.out.print("Input Patient ID : ");
+        int id = input.nextInt();
+        input.nextLine();
+
+        System.out.print("Input Patient Name : ");
+        String name = input.nextLine();
+
+        System.out.print("Input Patient Contact Number : ");
+        String contact = input.nextLine();
+
+        PatientDTO patientDTO = new PatientDTO(id,name,contact);
+        patientController.updatePatient(patientDTO);
+    }
+
+    public void deletePatient() throws Exception {
+
+        System.out.println("");
+        System.out.println("=============================");
+        System.out.println("========Delete Patient=======");
+        System.out.println("=============================");
+        System.out.println("");
+
+        System.out.print("Input Patient ID : ");
+        int id = input.nextInt();
+
+        patientController.deletePatient(id);
+
+    }
+
+}
+
