@@ -2,6 +2,7 @@ package edu.ijse.mvc.cli.view;
 
 import edu.ijse.mvc.cli.controller.PatientController;
 import edu.ijse.mvc.cli.dto.PatientDTO;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PatientView {
@@ -38,6 +39,10 @@ public class PatientView {
             case 3:
                  PatientView patientView3 = new PatientView();
                  patientView3.deletePatient();
+                 break;
+            case 4:
+                 PatientView patientView4 = new PatientView();
+                 patientView4.searchPatient();
 
             default:
                 break;
@@ -59,7 +64,14 @@ public class PatientView {
         String contact = input.nextLine();
 
         PatientDTO patientDTO = new PatientDTO(0,name,contact);
-        patientController.savePatient(patientDTO);
+
+        if(patientController.savePatient(patientDTO)){
+            System.out.println("");
+            System.out.println("Patient Saved Successfully");
+        } else {
+            System.out.println("");
+            System.out.println("Patient Saved Failed");
+        }
 
     }
 
@@ -82,7 +94,14 @@ public class PatientView {
         String contact = input.nextLine();
 
         PatientDTO patientDTO = new PatientDTO(id,name,contact);
-        patientController.updatePatient(patientDTO);
+
+        if(patientController.updatePatient(patientDTO)){
+            System.out.println("");
+            System.out.println("Patient Updated Successfully");
+        } else {
+            System.out.println("");
+            System.out.println("Patient Updated Failed");
+        }
     }
 
     public void deletePatient() throws Exception {
@@ -96,7 +115,32 @@ public class PatientView {
         System.out.print("Input Patient ID : ");
         int id = input.nextInt();
 
-        patientController.deletePatient(id);
+        if (patientController.deletePatient(id)){
+            System.out.println("");
+            System.out.println("Patient Deleted Successfully");
+        } else {
+            System.out.println("");
+            System.out.println("Patient Deleted Failed");
+        }
+
+    }
+
+    public void searchPatient() throws Exception {
+
+        System.out.println("");
+        System.out.println("==============================");
+        System.out.println("========Search Patients=======");
+        System.out.println("==============================");
+        System.out.println("");
+
+        ArrayList <PatientDTO> patientDTOS = patientController.getAllPatients();
+
+        for (PatientDTO patientDTO : patientDTOS){
+            System.out.printf("%-10s %-20s %-15s%n",
+                    patientDTO.getId(),
+                    patientDTO.getName(),
+                    patientDTO.getContact());
+        }
 
     }
 
