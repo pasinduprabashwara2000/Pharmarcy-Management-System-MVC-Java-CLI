@@ -1,6 +1,10 @@
 package edu.ijse.mvc.cli;
 
+import edu.ijse.mvc.cli.view.CanclePrescriptionView;
+import edu.ijse.mvc.cli.view.MedicineView;
 import edu.ijse.mvc.cli.view.PatientView;
+import edu.ijse.mvc.cli.view.ProcessPrescriptionView;
+
 import java.util.Scanner;
 
 public class Main {
@@ -32,6 +36,20 @@ public class Main {
                     PatientView patientView = new PatientView();
                     patientView.PatientManagement();
                     break;
+
+                case 2 :
+                    MedicineView medicineView = new MedicineView();
+                    medicineView.MedicineManagement();
+                    break;
+
+                case 3 :
+                    ProcessPrescriptionView processPrescriptionView = new ProcessPrescriptionView();
+                    processPrescriptionView.ProcessPrescription();
+                    break;
+
+                case 4 :
+                    CanclePrescriptionView canclePrescriptionView = new CanclePrescriptionView();
+
 
                 default:
             }
